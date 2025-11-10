@@ -1,6 +1,6 @@
 Ever built an app that crashes when users lose internet? 📱💥
 
-I just learned how to detect online/offline status in React Native, and honestly, I wish I'd known this sooner. Here's the simple solution that saved me hours of debugging.
+I just learned how to detect online/offline status in React Native, and honestly, I wish I'd known this sooner. Here's the simple solution.
 
 When building mobile apps, it's critical to know if the user has an active internet connection — especially when showing an **"offline" banner**, disabling certain actions, or syncing data. On the web, this is handled easily with `window.addEventListener("online/offline")`, but React Native works differently.
 
@@ -55,12 +55,12 @@ This simple hook lets you:
 
 **Question for you:** How do you handle offline states in your apps? Do you use NetInfo or something else? I'd love to hear your approach! 👇
 
-I'm Khaleel — sharing my daily React Native wins and lessons learned.
+I'm azeez — sharing my daily React Native wins and lessons learned.
 
 🔔 Hit follow for more practical tips like this
 💬 Drop your thoughts in the comments
 ♻️ Repost if you found this helpful
 
-🔗 Connect with me on X: @khaltech99
+🔗 Connect with me on X: @khaltech99 i follow back
 
 #ReactNative #MobileDevelopment #JavaScript #WebDev #CodingTips #Programming #TechCommunity
