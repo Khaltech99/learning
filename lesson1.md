@@ -1,10 +1,12 @@
-I recently learnt how to check a user’s online/offline status in React Native using the **@react-native-community/netinfo** package, and I thought to share a quick summary for anyone who might need it.
+Ever built an app that crashes when users lose internet? 📱💥
 
-When building mobile apps, it’s important to know if the user has an active internet connection — especially when showing an **“offline” banner**, disabling certain actions, or syncing data. On the web, this is handled easily with `window.addEventListener("online/offline")`, but React Native works differently.
+I just learned how to detect online/offline status in React Native, and honestly, I wish I'd known this sooner. Here's the simple solution that saved me hours of debugging.
 
-### How it works in React Native
+When building mobile apps, it's critical to know if the user has an active internet connection — especially when showing an **"offline" banner**, disabling certain actions, or syncing data. On the web, this is handled easily with `window.addEventListener("online/offline")`, but React Native works differently.
 
-React Native doesn't have the `window` object, so we use NetInfo instead.
+### The Challenge 🤔
+
+React Native doesn't have the `window` object, so we use **@react-native-community/netinfo** instead.
 
 **Installation (Expo):**
 
@@ -12,17 +14,17 @@ React Native doesn't have the `window` object, so we use NetInfo instead.
 npx expo install @react-native-community/netinfo
 ```
 
-**Usage example:**
+**The Solution (Just 15 lines!):**
 
 ```jsx
-import NetInfo from "@react-native-community/netinfo";
+import { addEventListener } from "@react-native-community/netinfo";
 import { useEffect, useState } from "react";
 
 export default function IsUserOnline() {
   const [isUserOnline, setIsUserOnline] = useState(false);
 
   useEffect(() => {
-    const unsubscribe = NetInfo.addEventListener((state) => {
+    const unsubscribe = addEventListener((state) => {
       setIsUserOnline(state.isConnected);
       console.log("Online?", state.isConnected);
     });
@@ -34,22 +36,31 @@ export default function IsUserOnline() {
 }
 ```
 
-`state` includes details such as connection type and `isConnected`, which lets you know whether the user is online.
+The `state` object gives you real-time connection type and `isConnected` status — game changer! 🚀
 
-### ✅ Why this matters
+### ✅ Why this matters (and why you need it)
 
-This is useful for:
+This simple hook lets you:
 
-- Showing offline UI/notifications
-- Preventing failed network requests
-- Improving user experience
-- Handling data sync gracefully
+- Show offline UI/notifications instantly
+- Prevent failed network requests (and angry users!)
+- Improve user experience dramatically
+- Handle data sync gracefully
 
-You can explore more features and what other properties in the aforementioned state in the official GitHub repo:
-[https://github.com/react-native-netinfo/react-native-netinfo](https://github.com/react-native-netinfo/react-native-netinfo)
+**Pro tip:** You can also check connection type (WiFi, cellular, etc.) to optimize data usage!
 
-Thanks for reading!
-I’m Khaleel — sharing my daily React Native learning journey.
-Follow for more quick, practical breakdowns.
+📚 Full docs here: [https://github.com/react-native-netinfo/react-native-netinfo](https://github.com/react-native-netinfo/react-native-netinfo)
 
-**X (Twitter): @khaltech99**
+---
+
+**Question for you:** How do you handle offline states in your apps? Do you use NetInfo or something else? I'd love to hear your approach! 👇
+
+I'm Khaleel — sharing my daily React Native wins and lessons learned.
+
+🔔 Hit follow for more practical tips like this
+💬 Drop your thoughts in the comments
+♻️ Repost if you found this helpful
+
+🔗 Connect with me on X: @khaltech99
+
+#ReactNative #MobileDevelopment #JavaScript #WebDev #CodingTips #Programming #TechCommunity
