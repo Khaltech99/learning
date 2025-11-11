@@ -1,0 +1,42 @@
+export const countryData = [
+  {
+    id: "1",
+    continent: "Asia",
+    country: "Saudi",
+    tourPlace: "Riyadh",
+    ratings: 4,
+    review: 153,
+  },
+  {
+    id: "2",
+    continent: "Europe",
+    country: "England",
+    tourPlace: "London",
+    ratings: 5,
+    review: 143,
+  },
+  {
+    id: "3",
+    continent: "South America",
+    country: "Brazil",
+    tourPlace: "Rio de Janeiro",
+    ratings: 4,
+    review: 153,
+  },
+  {
+    id: "4",
+    continent: "North America",
+    country: "Mexico",
+    tourPlace: "Mexican city",
+    ratings: 3,
+    review: 100,
+  },
+  {
+    id: "5",
+    continent: "Africa",
+    country: "Nigeria",
+    tourPlace: "Lagos",
+    ratings: 3,
+    review: 100,
+  },
+];
