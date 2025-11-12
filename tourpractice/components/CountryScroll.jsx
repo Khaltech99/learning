@@ -53,13 +53,15 @@ export default CountryScroll;
 const styles = StyleSheet.create({
   container: {
     marginTop: 10,
-    marginBottom: 45,
+    marginBottom: 50,
   },
   title: {
-    fontSize: 18,
-    fontWeight: "500",
+    fontSize: 22,
+    fontWeight: "700",
     letterSpacing: 1,
     marginVertical: 10,
+    fontStyle: "italic",
+    color: "#333",
   },
   scrollContent: {
     paddingVertical: 5,
@@ -67,7 +69,6 @@ const styles = StyleSheet.create({
   row: {
     flexDirection: "row",
     gap: 10,
-    paddingHorizontal: 10,
     alignItems: "center",
   },
   item: {
