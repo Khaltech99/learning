@@ -1,11 +1,11 @@
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, TouchableOpacity } from "react-native";
 import React from "react";
 
 const ButtonWrapper = ({ bg = "#000", style, children }) => {
   return (
-    <View style={[styles.wrapper, { backgroundColor: bg }, style]}>
+    <TouchableOpacity style={[styles.wrapper, { backgroundColor: bg }, style]}>
       {children}
-    </View>
+    </TouchableOpacity>
   );
 };
 
