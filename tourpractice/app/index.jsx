@@ -4,38 +4,41 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import SearchWrapper from "./../components/SearchWrapper";
 import CountryScroll from "../components/CountryScroll";
 import FancyImage from "../components/FancyImage";
-import ButtonWrapper from "../components/ButtonWrapper";
-import { ChevronRight } from "lucide-react-native";
 
 const { width } = Dimensions.get("window");
-
-// Optional: use a moderate scale factor for larger screens
 const scale = width > 380 ? 1.1 : 1;
 
 const Index = () => {
   return (
     <SafeAreaView style={styles.container}>
+      {/* ---- Header ---- */}
       <View style={styles.welcomeContainer}>
-        {/* ---- LEFT: Greeting ---- */}
         <View>
           <Text style={styles.userName}>Hello, Venessa</Text>
           <Text style={styles.welcomeText}>Welcome to tripGlide</Text>
         </View>
 
-        {/* ---- RIGHT: Avatar ---- */}
         <Image
-          source={require("../assets/images/—Pngtree—cartoon color simple male avatar_21692040.png")} // <-- renamed file
+          source={require("../assets/images/—Pngtree—cartoon color simple male avatar_21692040.png")}
           style={styles.avatar}
           resizeMode="contain"
         />
       </View>
+
       <SearchWrapper />
       <CountryScroll />
-      {/* <Image
-        source={require("../assets/images/rio1.jpg")}
-        style={styles.bgImage}
-      /> */}
-      <FancyImage />
+
+      {/* 🌆 Image Background + FancyImage Overlay */}
+      <View style={styles.overlayWrapper}>
+        <Image
+          source={require("../assets/images/rio3.jpg")}
+          style={styles.bgImage}
+          resizeMode="cover"
+        />
+
+        {/* FancyImage sits ON TOP of rio3.jpg */}
+        <FancyImage />
+      </View>
     </SafeAreaView>
   );
 };
@@ -57,31 +60,39 @@ const styles = StyleSheet.create({
     marginBottom: 24,
   },
 
-  /* ---------- TEXT ---------- */
   userName: {
-    fontSize: 26 * scale, // big, bold greeting
-    fontWeight: "700",
-    color: "#222",
+    fontSize: 28 * scale,
+    fontWeight: "600",
+    color: "#333",
     lineHeight: 32 * scale,
   },
   welcomeText: {
-    fontSize: 15 * scale, // subtle sub-title
+    fontSize: 15 * scale,
     color: "#666",
     fontWeight: "500",
     letterSpacing: 0.5,
     marginTop: 2,
   },
 
-  /* ---------- AVATAR ---------- */
   avatar: {
-    width: 55,
-    height: 55,
+    width: 50,
+    height: 50,
     borderRadius: 100,
     backgroundColor: "#f0f0f0",
   },
-  bgImage: {
+
+  // 🌆 Parent wrapper to layer image and FancyImage
+  overlayWrapper: {
+    position: "relative", // key line — makes children position relative to this
     width: "100%",
     height: 300,
+    marginTop: 0,
+  },
+
+  bgImage: {
+    width: "100%",
+    height: "85%",
     borderRadius: 20,
+    marginTop: 30,
   },
 });
