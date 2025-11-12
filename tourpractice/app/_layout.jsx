@@ -16,7 +16,7 @@ export default function RootLayout() {
           backgroundColor: "#000",
           height: 80,
           marginHorizontal: 20,
-          marginBottom: 40,
+          marginBottom: 35,
           borderRadius: 100,
           padding: 10,
           position: "absolute",
