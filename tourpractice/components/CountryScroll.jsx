@@ -15,6 +15,7 @@ const CountryScroll = () => {
 
   return (
     <View style={styles.container}>
+      <Text style={styles.title}>Select your next trip</Text>
       <ScrollView
         horizontal
         showsHorizontalScrollIndicator={false}
@@ -52,6 +53,13 @@ export default CountryScroll;
 const styles = StyleSheet.create({
   container: {
     marginTop: 10,
+    marginBottom: 45,
+  },
+  title: {
+    fontSize: 18,
+    fontWeight: "500",
+    letterSpacing: 1,
+    marginVertical: 10,
   },
   scrollContent: {
     paddingVertical: 5,

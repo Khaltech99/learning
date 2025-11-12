@@ -3,6 +3,9 @@ import React from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import SearchWrapper from "./../components/SearchWrapper";
 import CountryScroll from "../components/CountryScroll";
+import FancyImage from "../components/FancyImage";
+import ButtonWrapper from "../components/ButtonWrapper";
+import { ChevronRight } from "lucide-react-native";
 
 const { width } = Dimensions.get("window");
 
@@ -28,6 +31,11 @@ const Index = () => {
       </View>
       <SearchWrapper />
       <CountryScroll />
+      {/* <Image
+        source={require("../assets/images/rio1.jpg")}
+        style={styles.bgImage}
+      /> */}
+      <FancyImage />
     </SafeAreaView>
   );
 };
@@ -70,5 +78,10 @@ const styles = StyleSheet.create({
     height: 55,
     borderRadius: 100,
     backgroundColor: "#f0f0f0",
+  },
+  bgImage: {
+    width: "100%",
+    height: 300,
+    borderRadius: 20,
   },
 });
