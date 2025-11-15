@@ -5,13 +5,6 @@ import Button from "./Button";
 import { Folder, Plus } from "lucide-react-native";
 import { ScaledSheet } from "react-native-size-matters";
 
-export const todoData = [
-  { id: "plus", isPlus: true, bg: colors.lightBg },
-  { id: "2", title: "Blog", count: "21", bg: colors.pink },
-  { id: "3", title: "Personal", count: "12", bg: colors.lightBlue },
-  { id: "4", title: "Personal", count: "12", bg: colors.lemon },
-];
-
 const Card = ({ item, backgroundColor }) => {
   return (
     <View style={[styles.container, { backgroundColor: backgroundColor }]}>

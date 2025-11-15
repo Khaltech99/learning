@@ -10,3 +10,36 @@ export const colors = {
   blackText: "#000",
   whiteText: "#fff",
 };
+export const todoData = [
+  {
+    id: "plus",
+    isPlus: true,
+    bg: colors.lightBg,
+    todo: "update a cop of the last article",
+    sharedWith: "shred with amanda",
+  },
+  {
+    id: "2",
+    title: "Blog",
+    count: "21",
+    bg: colors.pink,
+    todo: "update a cop of the last article",
+    sharedWith: "shred with amanda",
+  },
+  {
+    id: "3",
+    title: "Personal",
+    count: "12",
+    bg: colors.lightBlue,
+    todo: "update a cop of the last article",
+    sharedWith: "shred with amanda",
+  },
+  {
+    id: "4",
+    title: "Personal",
+    count: "12",
+    bg: colors.lemon,
+    todo: "update a cop of the last article",
+    sharedWith: "shred with amanda",
+  },
+];
