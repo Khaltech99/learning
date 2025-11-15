@@ -10,7 +10,7 @@ import React from "react";
 import Wrapper from "../components/Wrapper";
 import { ScaledSheet } from "react-native-size-matters";
 import { colors } from "./../utils/colors";
-import { Search, Star } from "lucide-react-native";
+import { Search } from "lucide-react-native";
 import Card, { todoData } from "../components/Card";
 
 const index = () => {
@@ -40,11 +40,22 @@ const index = () => {
           data={todoData}
           keyExtractor={(item) => item.id}
           numColumns={2}
-          renderItem={({ item }) => (
-            <View style={{ flex: 1 }}>
-              <Card item={item} backgroundColor={item.bg} />
-            </View>
-          )}
+          contentContainerStyle={{ paddingHorizontal: 0 }}
+          renderItem={({ item, index }) => {
+            const isLeftColumn = index % 2 === 0; // left column
+            return (
+              <TouchableOpacity
+                style={{
+                  flex: 1,
+                  marginRight: isLeftColumn ? 10 : 0,
+                  marginLeft: isLeftColumn ? 0 : 10,
+                  marginVertical: 10,
+                }}
+              >
+                <Card item={item} backgroundColor={item.bg} />
+              </TouchableOpacity>
+            );
+          }}
         />
       </Wrapper>
     </View>
@@ -76,6 +87,7 @@ const styles = ScaledSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "flex-end",
+    marginBottom: "5@vs",
   },
   viewAllText: {
     color: colors.whiteText,
