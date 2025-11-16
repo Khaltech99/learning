@@ -1,12 +1,11 @@
 import {
   FlatList,
-  StatusBar,
   Text,
   TextInput,
   TouchableOpacity,
   View,
 } from "react-native";
-import React, { useRef, useMemo, useCallback } from "react";
+import React from "react";
 import Wrapper from "../components/Wrapper";
 import { ScaledSheet } from "react-native-size-matters";
 import { colors, todoData } from "./../utils/colors";
@@ -21,133 +20,110 @@ import {
 } from "lucide-react-native";
 import Card from "../components/Card";
 import Button from "@/components/Button";
-import { GestureHandlerRootView } from "react-native-gesture-handler";
-import AddTaskBottomSheet from "../components/AddTaskBottomSheet";
 
 const iconList = ["", Star, Briefcase, Flag, CheckCircle, Circle];
 
-const Index = () => {
-  const bottomSheetRef = useRef(null);
-  const snapPoints = useMemo(() => ["50%", "75%"], []);
-
-  const handleOpenBottomSheet = useCallback(() => {
-    bottomSheetRef.current?.expand();
-  }, []);
-
-  const handleCloseBottomSheet = useCallback(() => {
-    bottomSheetRef.current?.close();
-  }, []);
-
+const index = () => {
   return (
-    <GestureHandlerRootView style={{ flex: 1 }}>
-      <Wrapper style={styles.container}>
-        <StatusBar barStyle={"light-content"} />
-
-        <View style={{ flex: 1 }}>
-          {/* search section */}
-          <View style={styles.topContainer}>
-            <View style={styles.search}>
-              <Search color={colors.whiteText} />
-              <TextInput
-                style={styles.input}
-                placeholder="Search by group or task ..."
-                placeholderTextColor={colors.whiteText}
-              />
-            </View>
-            {/* view all container */}
-            <View style={styles.viewAllcontainer}>
-              <Text style={styles.viewAllText}>My groups</Text>
-
-              <TouchableOpacity>
-                <Text style={styles.viewAllBtn}>View all</Text>
-              </TouchableOpacity>
-            </View>
-            {/* GRID */}
-            <FlatList
-              data={todoData}
-              keyExtractor={(item) => item.id}
-              numColumns={2}
-              scrollEnabled={false}
-              contentContainerStyle={{ paddingHorizontal: 0 }}
-              renderItem={({ item, index }) => {
-                const isLeftColumn = index % 2 === 0;
-                return (
-                  <TouchableOpacity
-                    style={{
-                      flex: 1,
-                      marginRight: isLeftColumn ? 10 : 0,
-                      marginLeft: isLeftColumn ? 0 : 10,
-                      marginVertical: 10,
-                    }}
-                  >
-                    <Card item={item} backgroundColor={item.bg} index={index} />
-                  </TouchableOpacity>
-                );
-              }}
+    <Wrapper style={styles.container}>
+      <View style={{ flex: 1 }}>
+        {/* search section */}
+        <View style={styles.topContainer}>
+          <View style={styles.search}>
+            <Search color={colors.whiteText} />
+            <TextInput
+              style={styles.input}
+              placeholder="Search by group or task ..."
+              placeholderTextColor={colors.whiteText}
             />
           </View>
+          {/* view all container */}
+          <View style={styles.viewAllcontainer}>
+            <Text style={styles.viewAllText}>My groups</Text>
 
-          <View style={styles.bottomContainer}>
-            {/* bottom title */}
-            <View style={styles.bottomHeader}>
-              <Text style={styles.bottomHeaderTitle}>Today</Text>
-              <TouchableOpacity onPress={handleOpenBottomSheet}>
-                <Button backgroundColor={colors.primary} borderRadius={8}>
-                  <Plus color={colors.whiteText} />
-                </Button>
-              </TouchableOpacity>
-            </View>
-            <Text style={styles.bottomHeaderText}>8 tasks</Text>
-
-            {/* LISTS OF TODAY TODO */}
-            <FlatList
-              data={todoData}
-              keyExtractor={(item) => item.id}
-              showsVerticalScrollIndicator={false}
-              contentContainerStyle={{ paddingBottom: 20 }}
-              renderItem={({ item, index }) => {
-                const IconComponent = iconList[index % iconList.length];
-
-                return (
-                  <>
-                    {!item.isPlus && (
-                      <View style={styles.bottomTodoLists}>
-                        <Button backgroundColor={item.bg} borderRadius={8}>
-                          <IconComponent
-                            color={colors.blackText}
-                            size={20}
-                            fill={"black"}
-                          />
-                        </Button>
-                        <View style={styles.todoItemsContainer}>
-                          <Text style={styles.bottomTodoListTitle}>
-                            {item.todo}
-                          </Text>
-                          <Text style={styles.bottomTodoListText}>
-                            {item.sharedWith}
-                          </Text>
-                        </View>
-                      </View>
-                    )}
-                  </>
-                );
-              }}
-            />
+            <TouchableOpacity>
+              <Text style={styles.viewAllBtn}>View all</Text>
+            </TouchableOpacity>
           </View>
+          {/* GRID */}
+          {/* GRID */}
+          <FlatList
+            data={todoData}
+            keyExtractor={(item) => item.id}
+            numColumns={2}
+            scrollEnabled={false}
+            contentContainerStyle={{ paddingHorizontal: 0 }}
+            renderItem={({ item, index }) => {
+              const isLeftColumn = index % 2 === 0; // left column
+              return (
+                <TouchableOpacity
+                  style={{
+                    flex: 1,
+                    marginRight: isLeftColumn ? 10 : 0,
+                    marginLeft: isLeftColumn ? 0 : 10,
+                    marginVertical: 10,
+                  }}
+                >
+                  <Card item={item} backgroundColor={item.bg} index={index} />
+                </TouchableOpacity>
+              );
+            }}
+          />
         </View>
 
-        {/* Bottom Sheet */}
-        <AddTaskBottomSheet
-          bottomSheetRef={bottomSheetRef}
-          snapPoints={snapPoints}
-          onClose={handleCloseBottomSheet}
-        />
-      </Wrapper>
-    </GestureHandlerRootView>
+        <View style={styles.bottomContainer}>
+          {/* bottom title */}
+          <View style={styles.bottomHeader}>
+            <Text style={styles.bottomHeaderTitle}>Today</Text>
+            <TouchableOpacity>
+              <Button backgroundColor={colors.primary} borderRadius={8}>
+                <Plus color={colors.whiteText} />
+              </Button>
+            </TouchableOpacity>
+          </View>
+          <Text style={styles.bottomHeaderText}>8 tasks</Text>
+
+          {/* LISTS OF TODAY TODO */}
+          <FlatList
+            data={todoData}
+            keyExtractor={(item) => item.id}
+            showsVerticalScrollIndicator={false}
+            contentContainerStyle={{ paddingBottom: 20 }}
+            renderItem={({ item, index }) => {
+              const IconComponent = iconList[index % iconList.length];
+
+              return (
+                <>
+                  {!item.isPlus && (
+                    <View style={styles.bottomTodoLists}>
+                      <Button backgroundColor={item.bg} borderRadius={8}>
+                        <IconComponent
+                          color={colors.blackText}
+                          size={20}
+                          fill={"black"}
+                        />
+                      </Button>
+                      <View style={styles.todoItemsContainer}>
+                        <Text style={styles.bottomTodoListTitle}>
+                          {item.todo}
+                        </Text>
+                        <Text style={styles.bottomTodoListText}>
+                          {item.sharedWith}
+                        </Text>
+                      </View>
+                    </View>
+                  )}
+                </>
+              );
+            }}
+          />
+        </View>
+      </View>
+    </Wrapper>
   );
 };
 
-export default Index;
+export default index;
 
 const styles = ScaledSheet.create({
   container: {
@@ -169,8 +145,6 @@ const styles = ScaledSheet.create({
   },
   input: {
     flex: 1,
-    color: colors.whiteText,
-    fontWeight: "bold",
   },
   viewAllcontainer: {
     flexDirection: "row",
@@ -187,12 +161,15 @@ const styles = ScaledSheet.create({
     color: colors.whiteText,
     fontSize: "16@s",
   },
+
+  // button style
   bottomContainer: {
     backgroundColor: colors.whiteText,
     padding: "15@s",
     borderTopRightRadius: "20@s",
     borderTopLeftRadius: "20@s",
     width: "100%",
+
     flex: 1,
   },
   bottomHeader: {

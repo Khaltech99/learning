@@ -1,4 +1,4 @@
-import { Text, TouchableOpacity, View } from "react-native";
+import { Text, View } from "react-native";
 import React from "react";
 import { colors } from "@/utils/colors";
 import Button from "./Button";
@@ -22,12 +22,12 @@ const Card = ({ item, backgroundColor, index }) => {
   return (
     <View style={[styles.container, { backgroundColor: backgroundColor }]}>
       {item.isPlus ? (
-        <TouchableOpacity style={[styles.plusContainer, { width: "100%" }]}>
+        <View style={[styles.plusContainer, { width: "100%" }]}>
           <Plus color={colors.whiteText} size={40} style={styles.iconPlus} />
           <Text style={{ color: colors.whiteText, textAlign: "center" }}>
             Create group
           </Text>
-        </TouchableOpacity>
+        </View>
       ) : (
         <>
           {/* icon and title wrapper */}
