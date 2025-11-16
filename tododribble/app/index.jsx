@@ -1,5 +1,4 @@
 import {
-  Dimensions,
   FlatList,
   Text,
   TextInput,
@@ -10,13 +9,24 @@ import React from "react";
 import Wrapper from "../components/Wrapper";
 import { ScaledSheet } from "react-native-size-matters";
 import { colors, todoData } from "./../utils/colors";
-import { Search } from "lucide-react-native";
+import {
+  Briefcase,
+  CheckCircle,
+  Circle,
+  Flag,
+  Plus,
+  Search,
+  Star,
+} from "lucide-react-native";
 import Card from "../components/Card";
+import Button from "@/components/Button";
+
+const iconList = ["", Star, Briefcase, Flag, CheckCircle, Circle];
 
 const index = () => {
   return (
-    <View style={styles.container}>
-      <Wrapper>
+    <Wrapper style={styles.container}>
+      <View style={{ flex: 1 }}>
         {/* search section */}
         <View style={styles.topContainer}>
           <View style={styles.search}>
@@ -30,15 +40,18 @@ const index = () => {
           {/* view all container */}
           <View style={styles.viewAllcontainer}>
             <Text style={styles.viewAllText}>My groups</Text>
+
             <TouchableOpacity>
               <Text style={styles.viewAllBtn}>View all</Text>
             </TouchableOpacity>
           </View>
           {/* GRID */}
+          {/* GRID */}
           <FlatList
             data={todoData}
             keyExtractor={(item) => item.id}
             numColumns={2}
+            scrollEnabled={false}
             contentContainerStyle={{ paddingHorizontal: 0 }}
             renderItem={({ item, index }) => {
               const isLeftColumn = index % 2 === 0; // left column
@@ -51,16 +64,62 @@ const index = () => {
                     marginVertical: 10,
                   }}
                 >
-                  <Card item={item} backgroundColor={item.bg} />
+                  <Card item={item} backgroundColor={item.bg} index={index} />
                 </TouchableOpacity>
               );
             }}
           />
         </View>
 
-        <View style={styles.bottomContainer}></View>
-      </Wrapper>
-    </View>
+        <View style={styles.bottomContainer}>
+          {/* bottom title */}
+          <View style={styles.bottomHeader}>
+            <Text style={styles.bottomHeaderTitle}>Today</Text>
+            <TouchableOpacity>
+              <Button backgroundColor={colors.primary} borderRadius={8}>
+                <Plus color={colors.whiteText} />
+              </Button>
+            </TouchableOpacity>
+          </View>
+          <Text style={styles.bottomHeaderText}>8 tasks</Text>
+
+          {/* LISTS OF TODAY TODO */}
+          <FlatList
+            data={todoData}
+            keyExtractor={(item) => item.id}
+            showsVerticalScrollIndicator={false}
+            contentContainerStyle={{ paddingBottom: 20 }}
+            renderItem={({ item, index }) => {
+              const IconComponent = iconList[index % iconList.length];
+
+              return (
+                <>
+                  {!item.isPlus && (
+                    <View style={styles.bottomTodoLists}>
+                      <Button backgroundColor={item.bg} borderRadius={8}>
+                        <IconComponent
+                          color={colors.blackText}
+                          size={20}
+                          fill={"black"}
+                        />
+                      </Button>
+                      <View style={styles.todoItemsContainer}>
+                        <Text style={styles.bottomTodoListTitle}>
+                          {item.todo}
+                        </Text>
+                        <Text style={styles.bottomTodoListText}>
+                          {item.sharedWith}
+                        </Text>
+                      </View>
+                    </View>
+                  )}
+                </>
+              );
+            }}
+          />
+        </View>
+      </View>
+    </Wrapper>
   );
 };
 
@@ -69,7 +128,6 @@ export default index;
 const styles = ScaledSheet.create({
   container: {
     backgroundColor: colors.primary,
-    height: "100%",
     flex: 1,
   },
   topContainer: {
@@ -103,12 +161,46 @@ const styles = ScaledSheet.create({
     color: colors.whiteText,
     fontSize: "16@s",
   },
+
+  // button style
   bottomContainer: {
     backgroundColor: colors.whiteText,
-    padding: "20@s",
-    borderTopRightRadius: 30,
-    borderTopLeftRadius: 30,
+    padding: "15@s",
+    borderTopRightRadius: "20@s",
+    borderTopLeftRadius: "20@s",
     width: "100%",
-    marginTop: "10@vs",
+
+    flex: 1,
+  },
+  bottomHeader: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
+  bottomHeaderTitle: {
+    fontSize: "20@s",
+    fontWeight: "bold",
+  },
+  bottomHeaderText: {
+    color: colors.todoText,
+    fontWeight: "700",
+    marginBottom: "15@vs",
+  },
+  bottomTodoLists: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: "15@s",
+    marginBottom: "15@vs",
+  },
+  todoItemsContainer: {},
+  bottomTodoListTitle: {
+    color: colors.blackText,
+    fontWeight: "bold",
+    fontSize: "14@s",
+  },
+  bottomTodoListText: {
+    color: colors.todoText,
+    fontWeight: "500",
+    fontSize: "12@s",
   },
 });

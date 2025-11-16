@@ -2,15 +2,28 @@ import { Text, View } from "react-native";
 import React from "react";
 import { colors } from "@/utils/colors";
 import Button from "./Button";
-import { Folder, Plus } from "lucide-react-native";
+import {
+  Folder,
+  Plus,
+  Star,
+  Briefcase,
+  Flag,
+  CheckCircle,
+  Circle,
+} from "lucide-react-native";
 import { ScaledSheet } from "react-native-size-matters";
 
-const Card = ({ item, backgroundColor }) => {
+const iconList = ["", Briefcase, Star, Folder, Flag, CheckCircle, Circle];
+
+const Card = ({ item, backgroundColor, index }) => {
+  // Get icon based on index, cycling through the iconList
+  const IconComponent = iconList[index % iconList.length];
+
   return (
     <View style={[styles.container, { backgroundColor: backgroundColor }]}>
       {item.isPlus ? (
         <View style={[styles.plusContainer, { width: "100%" }]}>
-          <Plus color={colors.whiteText} size={50} style={styles.iconPlus} />
+          <Plus color={colors.whiteText} size={40} style={styles.iconPlus} />
           <Text style={{ color: colors.whiteText, textAlign: "center" }}>
             Create group
           </Text>
@@ -20,7 +33,7 @@ const Card = ({ item, backgroundColor }) => {
           {/* icon and title wrapper */}
           <View style={styles.iconCountContainer}>
             <Button>
-              <Folder fill={"black"} />
+              <IconComponent fill={"black"} color={"black"} />
             </Button>
             {/* count */}
             <Text style={styles.count}>{item.count}</Text>
