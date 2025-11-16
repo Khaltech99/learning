@@ -28,7 +28,7 @@ const iconList = ["", Star, Briefcase, Flag, CheckCircle, Circle];
 
 const Index = () => {
   const bottomSheetRef = useRef(null);
-  const snapPoints = useMemo(() => ["50%", "75%"], []);
+  const snapPoints = useMemo(() => ["100%"], []);
 
   const handleOpenBottomSheet = useCallback(() => {
     bottomSheetRef.current?.expand();
@@ -170,7 +170,6 @@ const styles = ScaledSheet.create({
   input: {
     flex: 1,
     color: colors.whiteText,
-    fontWeight: "bold",
   },
   viewAllcontainer: {
     flexDirection: "row",

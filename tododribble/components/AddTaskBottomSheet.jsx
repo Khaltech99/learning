@@ -7,6 +7,7 @@ import { X } from "lucide-react-native";
 import Calendar from "./Calendar";
 import Time from "./Time";
 import Category from "./Category";
+import Wrapper from "./Wrapper";
 
 const AddTaskBottomSheet = ({ bottomSheetRef, snapPoints, onClose }) => {
   return (
@@ -33,7 +34,6 @@ const AddTaskBottomSheet = ({ bottomSheetRef, snapPoints, onClose }) => {
           multiline
           numberOfLines={2}
         />
-
         <TextInput
           style={[styles.bottomSheetInput, styles.textArea]}
           placeholder="Notes"
@@ -44,12 +44,11 @@ const AddTaskBottomSheet = ({ bottomSheetRef, snapPoints, onClose }) => {
         <Time />
         <Category />
         {/* TIME SEGMENT */}
-
         <View style={styles.bottomSheetButtons}>
           <TouchableOpacity
             style={styles.addButton}
             onPress={() => {
-              // Add your task creation logic here
+              // task logic
               console.log("Task added");
               onClose();
             }}
@@ -131,7 +130,7 @@ const styles = ScaledSheet.create({
   bottomSheetButtons: {
     flexDirection: "row",
     gap: "10@s",
-    marginTop: "20@vs",
+    //marginTop: "20@vs",
   },
   cancelButton: {
     flex: 1,

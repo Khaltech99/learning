@@ -330,7 +330,7 @@ const styles = ScaledSheet.create({
   },
   expandButton: {
     alignItems: "center",
-    paddingVertical: "10@vs",
+    paddingVertical: "5@vs",
     marginTop: "5@vs",
   },
 });
