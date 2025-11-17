@@ -57,7 +57,7 @@ const Onboardingscreen = () => {
     ]).start();
   };
 
-  // run animation whenever index updates, keps it o sync
+  // run animation whenever index updates, keeps the dots synced
   useEffect(() => {
     animateSlide();
   }, [index]);
