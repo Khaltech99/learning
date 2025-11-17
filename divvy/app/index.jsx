@@ -1,6 +1,6 @@
 import { useRouter } from "expo-router";
 import { useEffect } from "react";
-import { Image, View } from "react-native";
+import { Image, StatusBar, View } from "react-native";
 import { colors } from "./../constants/color";
 
 export default function Index() {
@@ -23,6 +23,11 @@ export default function Index() {
         backgroundColor: colors.customWhite,
       }}
     >
+      <StatusBar
+        barStyle="dark-content"
+        backgroundColor="transparent"
+        translucent
+      />
       <Image source={require("../assets/images/logobig.png")} />
     </View>
   );
