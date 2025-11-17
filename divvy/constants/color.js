@@ -1,0 +1,16 @@
+export const colors = {
+  customBlack: "#000",
+  customWhite: "#fff",
+  customBlue: "#007AFF",
+  customGrayBg: "#E5E7EB",
+  customBorder: "#F6F5F3",
+  customPink: "#DE5235",
+  customLemon: "#10BC7E",
+  customOrange: "#FEAE2C",
+  customLightBlue: "#82A9C6",
+  customBorder2: "#E2E2E2",
+  customTextwhite: "#f5f5f5",
+  customTextGray: "#9CA3AF",
+  customBlackOpacity: "rgba(0, 0, 0, 0.4)",
+  customBlackOpacity60: "rgba(0, 0, 0, 0.6)",
+};
