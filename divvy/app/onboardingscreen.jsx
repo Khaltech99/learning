@@ -5,6 +5,7 @@ import {
   View,
   PanResponder,
   TouchableOpacity,
+  StatusBar,
 } from "react-native";
 import { ScaledSheet } from "react-native-size-matters";
 import GeistText from "./../components/GeistText";
