@@ -70,6 +70,7 @@ const Login = () => {
               ...styles.button,
               color: isValid ? colors.customTextwhite : colors.customTextGray, // dynamic text color
             }}
+            onPress={router.push("/(tab)/homeTab")}
           >
             Log in
           </TextButton>
