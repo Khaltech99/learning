@@ -1,5 +1,6 @@
 import React from "react";
 import { Tabs } from "expo-router";
+import { View, Pressable } from "react-native";
 import Home from "../../assets/icons/home.svg";
 import HomeFilled from "../../assets/icons/homeFilled.svg";
 import Splits from "../../assets/icons/splitsorigin.svg";
@@ -7,14 +8,19 @@ import SplitsFilled from "../../assets/icons/splitFilled.svg";
 import Transaction from "../../assets/icons/transaction.svg";
 import Profile from "../../assets/icons/profile.svg";
 import BigPlus from "../../components/BigPlus";
+
 const Tablayout = () => {
   return (
     <Tabs
       screenOptions={{
         headerShown: false,
         tabBarStyle: {
-          padding: 30,
-          height: 80,
+          height: 90,
+          paddingBottom: 10,
+          paddingTop: 10,
+        },
+        tabBarLabelStyle: {
+          marginTop: 5,
         },
       }}
     >
@@ -38,7 +44,11 @@ const Tablayout = () => {
         name="plusTab"
         options={{
           tabBarLabel: () => null,
-          tabBarIcon: ({ size, focused, color }) => <BigPlus />,
+          tabBarIcon: ({ size, focused, color }) => (
+            <View style={{ marginTop: -40 }}>
+              <BigPlus />
+            </View>
+          ),
         }}
       />
       <Tabs.Screen
