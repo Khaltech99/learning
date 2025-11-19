@@ -1,6 +1,6 @@
 import React from "react";
 import { Tabs } from "expo-router";
-import { View, Pressable } from "react-native";
+import { View } from "react-native";
 import Home from "../../assets/icons/home.svg";
 import HomeFilled from "../../assets/icons/homeFilled.svg";
 import Splits from "../../assets/icons/splitsorigin.svg";
