@@ -4,9 +4,15 @@ import GeistText from "./GeistText";
 import { colors } from "../constants/color";
 import { splitsData } from "../utils/data";
 import { ScaledSheet } from "react-native-size-matters";
-// Update with correct path
 
-const Splits = () => {
+const Splits = ({ searchQuery = "" }) => {
+  // filter only when searchQuery exists
+  const filteredData = searchQuery
+    ? splitsData.filter((item) =>
+        item.title.toLowerCase().includes(searchQuery.toLowerCase())
+      )
+    : splitsData;
+
   const renderItem = ({ item }) => (
     <View style={styles.container}>
       {/* left */}
@@ -19,6 +25,7 @@ const Splits = () => {
         >
           <Image source={item.icon} style={styles.img} />
         </View>
+
         <View>
           <GeistText style={styles.title}>{item.title}</GeistText>
           <GeistText style={styles.text}>{item.dueDate}</GeistText>
@@ -37,11 +44,12 @@ const Splits = () => {
 
   return (
     <FlatList
-      data={splitsData}
+      data={filteredData}
       renderItem={renderItem}
       keyExtractor={(item, index) => index.toString()}
-      contentContainerStyle={{ gap: 15 }}
+      contentContainerStyle={{ gap: 15, paddingBottom: 30 }}
       showsVerticalScrollIndicator={false}
+      style={{ flex: 1 }}
     />
   );
 };
@@ -55,43 +63,48 @@ const styles = ScaledSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
   },
+
   leftContainer: {
     flexDirection: "row",
     alignItems: "center",
     gap: "10@s",
   },
+
   rightContainer: {
     alignItems: "flex-end",
   },
+
   imgContainer: {
     width: "45@s",
-    height: "45@vs",
-    borderRadius: "100%",
+    height: "45@s",
+    borderRadius: "45@s",
     justifyContent: "center",
     alignItems: "center",
     padding: "10@s",
     backgroundColor: colors.customLemon,
-    elevation: "6@s",
+    elevation: 6,
   },
+
   img: {
     width: "100%",
     height: "100%",
+    borderRadius: "45@s",
   },
+
   title: {
     fontSize: "14@ms",
-    fontWeight: 400,
-    lineHeight: "100%",
+    fontWeight: "500",
   },
+
   text: {
     fontSize: "11@ms",
     color: colors.customBlackOpacity60,
-    fontWeight: 400,
-    lineHeight: "100%",
+    fontWeight: "400",
   },
+
   textMembers: {
     fontSize: "10@ms",
     color: colors.customBlackOpacity60,
-    fontWeight: 400,
-    lineHeight: "100%",
+    fontWeight: "400",
   },
 });
