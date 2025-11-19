@@ -1,12 +1,6 @@
 import React from "react";
 import Plus from "../assets/icons/plus.svg";
-import {
-  TouchableOpacity,
-  View,
-  Text,
-  StyleSheet,
-  Platform,
-} from "react-native";
+import { TouchableOpacity, View, StyleSheet, Platform } from "react-native";
 export default function BigPlus({
   size = 60,
   color = "#2979FF",
