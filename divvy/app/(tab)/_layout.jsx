@@ -15,7 +15,7 @@ const Tablayout = () => {
       screenOptions={{
         headerShown: false,
         tabBarStyle: {
-          height: 90,
+          height: 75,
           paddingBottom: 10,
           paddingTop: 10,
         },
