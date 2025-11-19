@@ -33,13 +33,13 @@ const SplitsTab = () => {
           placeholderTextColor={colors.customBlackOpacity}
           style={styles.input}
           value={searchQuery}
-          onChangeText={setSearchQuery} // <-- ONLY ADDITION
+          onChangeText={setSearchQuery}
         />
       </View>
 
       {/* list */}
       <View style={{ flex: 1 }}>
-        <Splits searchQuery={searchQuery} /> {/* <-- ONLY ADDITION */}
+        <Splits searchQuery={searchQuery} />
       </View>
     </SafeAreaView>
   );
