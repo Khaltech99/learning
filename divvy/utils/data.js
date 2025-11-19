@@ -34,7 +34,7 @@ export const splitsData = [
   {
     title: "Laptop for David",
     icon: require("../assets/images/laptop.png"),
-    backgroundColor: colors.customLightBlue,
+    backgroundColor: colors.customLemon,
     members: 12,
     amount: 300000,
     dueDate: "Due on October 1st, 2025",
@@ -74,7 +74,7 @@ export const splitsData = [
   {
     title: "Graduation",
     icon: require("../assets/images/pad.png"),
-    backgroundColor: colors.customLightBlue,
+    backgroundColor: colors.customOrange,
     members: 12,
     amount: 340000,
     dueDate: "Due on October 1st, 2025",
@@ -90,7 +90,7 @@ export const splitsData = [
   {
     title: "Graduation",
     icon: require("../assets/images/pad.png"),
-    backgroundColor: colors.customLightBlue,
+    backgroundColor: colors.customLemon,
     members: 13,
     amount: 390000,
     dueDate: "Due on October 1st, 2025",
