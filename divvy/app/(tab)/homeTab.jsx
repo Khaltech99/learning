@@ -22,7 +22,7 @@ const HomeTab = () => {
   const handleScroll = (event) => {
     const scrollPosition = event.nativeEvent.contentOffset.x;
     const cardWidth = 263; // Width of each card
-    const gap = 15; // Gap between cards
+    const gap = 15; // Gap between the cards
     const index = Math.round(scrollPosition / (cardWidth + gap));
     setActiveCardIndex(index);
   };
