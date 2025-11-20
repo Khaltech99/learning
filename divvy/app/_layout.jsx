@@ -6,7 +6,8 @@ export default function RootLayout() {
     <FontProvider>
       <Stack screenOptions={{ headerShown: false }}>
         <Stack.Screen name="index" />
-        <Stack.Screen name="onboardingscreen" />
+        <Stack.Screen name="(screens)/onboardingscreen" />
+        <Stack.Screen name="(screens)/addExpensesScreen" />
       </Stack>
     </FontProvider>
   );
