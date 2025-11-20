@@ -96,3 +96,28 @@ export const splitsData = [
     dueDate: "Due on October 1st, 2025",
   },
 ];
+
+export const splitUserData = [
+  { user: "daniel", image: require("../assets/images/bushyman.jpg") },
+  { user: "Steph", image: require("../assets/images/lollypopman.jpg") },
+  { user: "John", image: require("../assets/images/earringman.jpg") },
+  { user: "Mary", image: require("../assets/images/flowergirl.jpg") },
+  { user: "Azeez", image: require("../assets/images/brownskinguy.jpg") },
+  { user: "David", image: require("../assets/images/neckchainman.jpg") },
+  { user: "Isah", image: require("../assets/images/maninblack.jpg") },
+];
+
+export const slideImages = [
+  {
+    busImage: require("../assets/images/bus.png"),
+    backgroundColor: colors.customLemon,
+  },
+  {
+    homeImage: require("../assets/images/supermarket.png"),
+    backgroundColor: colors.customOrange,
+  },
+  {
+    laptopImage: require("../assets/images/laptop.png"),
+    backgroundColor: colors.customPink,
+  },
+];
