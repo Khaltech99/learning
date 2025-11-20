@@ -1,5 +1,5 @@
 import React from "react";
-import { Tabs } from "expo-router";
+import { Tabs, useRouter } from "expo-router";
 import { View } from "react-native";
 import Home from "../../assets/icons/home.svg";
 import HomeFilled from "../../assets/icons/homeFilled.svg";
@@ -10,6 +10,7 @@ import Profile from "../../assets/icons/profile.svg";
 import BigPlus from "../../components/BigPlus";
 
 const Tablayout = () => {
+  const router = useRouter();
   return (
     <Tabs
       screenOptions={{
@@ -46,10 +47,15 @@ const Tablayout = () => {
           tabBarLabel: () => null,
           tabBarIcon: ({ size, focused, color }) => (
             <View style={{ marginTop: -40 }}>
-              <BigPlus />
+              <BigPlus onPress={() => router.push("/(tab)/plusTab")} />
             </View>
           ),
         }}
+        listeners={() => ({
+          tabPress: (e) => {
+            e.preventDefault();
+          },
+        })}
       />
       <Tabs.Screen
         name="transactionsTab"
