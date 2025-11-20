@@ -24,11 +24,11 @@ export default TextButton;
 
 const styles = ScaledSheet.create({
   container: {
-    width: "100%",
     paddingVertical: "10@s",
     paddingHorizontal: "20@s",
     justifyContent: "center",
     alignItems: "center",
     borderRadius: "16@s",
+    width: "100%",
   },
 });
