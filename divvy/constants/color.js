@@ -13,4 +13,5 @@ export const colors = {
   customTextGray: "#9CA3AF",
   customBlackOpacity: "rgba(0, 0, 0, 0.4)",
   customBlackOpacity60: "rgba(0, 0, 0, 0.6)",
+  customBackButton: "#f2f2f2",
 };
