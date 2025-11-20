@@ -1,4 +1,4 @@
-import { StyleSheet, TouchableOpacity, View } from "react-native";
+import { TouchableOpacity } from "react-native";
 import React from "react";
 import { colors } from "../constants/color";
 import { ScaledSheet } from "react-native-size-matters";
@@ -7,10 +7,12 @@ const IconButton = ({
   style,
   backgroundColor = colors.customBlue,
   children,
+  onPress,
 }) => {
   return (
     <TouchableOpacity
       style={[styles.container, style, { backgroundColor: backgroundColor }]}
+      onPress={onPress}
     >
       {children}
     </TouchableOpacity>
