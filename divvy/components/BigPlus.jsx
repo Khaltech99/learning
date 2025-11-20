@@ -1,7 +1,8 @@
 import React from "react";
 import Plus from "../assets/icons/plus.svg";
 import { TouchableOpacity, View, StyleSheet, Platform } from "react-native";
-export default function BigPlus({
+
+function BigPlus({
   size = 60,
   color = "#2979FF",
   iconColor = "#FFFFFF",
@@ -42,7 +43,7 @@ export default function BigPlus({
     </TouchableOpacity>
   );
 }
-
+export default BigPlus;
 const styles = StyleSheet.create({
   wrapper: {
     alignItems: "center",
