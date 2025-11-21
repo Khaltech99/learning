@@ -97,6 +97,7 @@ export const splitsData = [
   },
 ];
 
+// Splits user images
 export const splitUserData = [
   { user: "daniel", image: require("../assets/images/bushyman.jpg") },
   { user: "Steph", image: require("../assets/images/lollypopman.jpg") },
@@ -107,6 +108,7 @@ export const splitUserData = [
   { user: "Isah", image: require("../assets/images/maninblack.jpg") },
 ];
 
+// Slider Images
 export const slideImages = [
   {
     busImage: require("../assets/images/bus.png"),
