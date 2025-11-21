@@ -1,11 +1,13 @@
 import { colors } from "../constants/color";
 
+// Card Data
 export const cardData = [
   { amount: "27,000", kobo: 90 },
   { amount: "20,000", kobo: 99 },
   { amount: "30,000", kobo: 91 },
 ];
 
+// Splits Data
 export const splitsData = [
   {
     title: "House Rent",
