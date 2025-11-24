@@ -1,4 +1,4 @@
-import { Image, StyleSheet, TouchableOpacity, View } from "react-native";
+import { Image, TouchableOpacity, View } from "react-native";
 import React from "react";
 import IconButton from "../../components/IconButton";
 import CaretLeft from "../../assets/icons/caretleft.svg";
@@ -8,7 +8,6 @@ import { colors } from "../../constants/color";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { ScaledSheet } from "react-native-size-matters";
 import Pencil from "../../assets/icons/pencil2.svg";
-import PadLock from "../../assets/icons/password.svg";
 import CaretRightNew from "../../assets/icons/caretrightnew.svg";
 import { settings } from "../../utils/data";
 
