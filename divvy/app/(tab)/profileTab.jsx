@@ -8,6 +8,8 @@ import { colors } from "../../constants/color";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { ScaledSheet } from "react-native-size-matters";
 import Pencil from "../../assets/icons/pencil2.svg";
+import PadLock from "../../assets/icons/password.svg";
+import CaretRightNew from "../../assets/icons/caretrightnew.svg";
 
 const ProfileTab = () => {
   const router = useRouter();
@@ -37,6 +39,26 @@ const ProfileTab = () => {
         />
         <GeistText style={styles.userName}>Ikeh David</GeistText>
         <GeistText style={styles.userEmail}>ikehdavid@gmail.com</GeistText>
+      </View>
+
+      {/* Settings Lists Section */}
+      <GeistText style={styles.settingHeaderText}>Settings List</GeistText>
+      <View style={styles.settingListsContainer}>
+        <View style={styles.leftIconContainer}>
+          <IconButton
+            style={styles.iconButton}
+            backgroundColor="rgba(0, 122, 255, 0.1)"
+          >
+            <PadLock />
+          </IconButton>
+          <View>
+            <GeistText style={styles.title}>Password</GeistText>
+            <GeistText style={styles.text}>
+              Have a change of password here
+            </GeistText>
+          </View>
+        </View>
+        <CaretRightNew />
       </View>
     </SafeAreaView>
   );
@@ -88,6 +110,7 @@ const styles = ScaledSheet.create({
   informationContainer: {
     justifyContent: "center",
     alignItems: "center",
+    marginBottom: "15@vs",
   },
   userName: {
     fontSize: "22@ms",
@@ -102,5 +125,39 @@ const styles = ScaledSheet.create({
     color: colors.customBlackOpacity60,
     fontWeight: "400",
     lineHeight: "100%",
+  },
+
+  // SETTINGS LIST CSS
+  settingHeaderText: {
+    fontSize: "16@ms",
+    color: colors.customBlack,
+    fontWeight: "500",
+    lineHeight: "100%",
+    marginVertical: "8@vs",
+  },
+  settingListsContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    borderBottomWidth: "1@s",
+    borderBottomColor: "rgba(226, 226, 226, 0.4)",
+    paddingBottom: "10@vs",
+  },
+  leftIconContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: "10@s",
+  },
+  text: {
+    fontSize: "11@ms",
+    color: colors.customBlackOpacity60,
+    fontWeight: "400",
+    lineHeight: "100%",
+  },
+  iconButton: {
+    padding: "15@s",
+    height: "45@s",
+    width: "45@s",
+    borderRadius: "45@s",
   },
 });
