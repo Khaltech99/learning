@@ -1,4 +1,9 @@
 import { colors } from "../constants/color";
+import PadLock from "../assets/icons/password.svg";
+import Support from "../assets/icons/support.svg";
+import Card from "../assets/icons/card.svg";
+import Refer from "../assets/icons/refer.svg";
+import Logout from "../assets/icons/logout.svg";
 
 // Card Data
 export const cardData = [
@@ -123,5 +128,38 @@ export const slideImages = [
   {
     laptopImage: require("../assets/images/laptop.png"),
     backgroundColor: colors.customPink,
+  },
+];
+
+export const settings = [
+  {
+    icon: PadLock,
+    backgroundColor: "rgba(0, 122, 255, 0.1)",
+    title: "Password",
+    text: "Have a change of password here",
+  },
+  {
+    icon: Support,
+    backgroundColor: "rgba(233, 143, 20, 0.1)",
+    title: "Support",
+    text: "Contact our support team here",
+  },
+  {
+    icon: Card,
+    backgroundColor: "rgba(113, 58, 139, 0.1)",
+    title: "Saved Cards",
+    text: "See your saved cards here",
+  },
+  {
+    icon: Refer,
+    backgroundColor: "rgba(14, 160, 41, 0.1)",
+    title: "Refer & Earn",
+    text: "Refer someone and earn money",
+  },
+  {
+    icon: Logout,
+    backgroundColor: "rgba(230, 60, 60, 0.1)",
+    title: "Log Out",
+    text: "Signout of your account securely",
   },
 ];
