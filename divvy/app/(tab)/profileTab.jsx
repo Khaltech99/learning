@@ -1,4 +1,4 @@
-import { Image, StyleSheet, View } from "react-native";
+import { Image, StyleSheet, TouchableOpacity, View } from "react-native";
 import React from "react";
 import IconButton from "../../components/IconButton";
 import CaretLeft from "../../assets/icons/caretleft.svg";
@@ -10,6 +10,7 @@ import { ScaledSheet } from "react-native-size-matters";
 import Pencil from "../../assets/icons/pencil2.svg";
 import PadLock from "../../assets/icons/password.svg";
 import CaretRightNew from "../../assets/icons/caretrightnew.svg";
+import { settings } from "../../utils/data";
 
 const ProfileTab = () => {
   const router = useRouter();
@@ -38,28 +39,32 @@ const ProfileTab = () => {
           style={styles.avatar}
         />
         <GeistText style={styles.userName}>Ikeh David</GeistText>
-        <GeistText style={styles.userEmail}>ikehdavid@gmail.com</GeistText>
+        <GeistText style={styles.userEmail}>
+          ikehdavid@gmail.com | 9057310024
+        </GeistText>
       </View>
 
       {/* Settings Lists Section */}
       <GeistText style={styles.settingHeaderText}>Settings List</GeistText>
-      <View style={styles.settingListsContainer}>
-        <View style={styles.leftIconContainer}>
-          <IconButton
-            style={styles.iconButton}
-            backgroundColor="rgba(0, 122, 255, 0.1)"
-          >
-            <PadLock />
-          </IconButton>
-          <View>
-            <GeistText style={styles.title}>Password</GeistText>
-            <GeistText style={styles.text}>
-              Have a change of password here
-            </GeistText>
+      {settings.map((item, index) => (
+        <TouchableOpacity style={styles.settingListsContainer} key={index}>
+          <View style={styles.leftIconContainer}>
+            <IconButton
+              style={styles.iconButton}
+              backgroundColor={item.backgroundColor}
+            >
+              <item.icon width={20} height={20} />
+            </IconButton>
+
+            <View>
+              <GeistText style={styles.title}>{item.title}</GeistText>
+              <GeistText style={styles.text}>{item.text}</GeistText>
+            </View>
           </View>
-        </View>
-        <CaretRightNew />
-      </View>
+
+          <CaretRightNew />
+        </TouchableOpacity>
+      ))}
     </SafeAreaView>
   );
 };
@@ -110,7 +115,9 @@ const styles = ScaledSheet.create({
   informationContainer: {
     justifyContent: "center",
     alignItems: "center",
-    marginBottom: "15@vs",
+    marginBottom: "30@vs",
+
+    borderBottomColor: "rgba(226, 226, 226, 0.4)",
   },
   userName: {
     fontSize: "22@ms",
@@ -142,6 +149,7 @@ const styles = ScaledSheet.create({
     borderBottomWidth: "1@s",
     borderBottomColor: "rgba(226, 226, 226, 0.4)",
     paddingBottom: "10@vs",
+    marginTop: "10@vs",
   },
   leftIconContainer: {
     flexDirection: "row",
