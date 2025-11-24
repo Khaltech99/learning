@@ -7,6 +7,7 @@ import Splits from "../../assets/icons/splitsorigin.svg";
 import SplitsFilled from "../../assets/icons/splitFilled.svg";
 import Transaction from "../../assets/icons/transaction.svg";
 import Profile from "../../assets/icons/profile.svg";
+import ProfileBlue from "../../assets/icons/ProfileBlue.svg";
 import BigPlus from "../../components/BigPlus";
 
 const Tablayout = () => {
@@ -68,7 +69,8 @@ const Tablayout = () => {
         name="profileTab"
         options={{
           tabBarLabel: "Profile",
-          tabBarIcon: ({ size, focused, color }) => <Profile />,
+          tabBarIcon: ({ size, focused, color }) =>
+            focused ? <ProfileBlue /> : <Profile />,
         }}
       />
     </Tabs>
