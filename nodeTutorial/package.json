@@ -1,0 +1,13 @@
+{
+  "name": "nodetutorial",
+  "version": "1.0.0",
+  "description": "learning nodejs",
+  "main": "index.js",
+  "type":"module",
+  
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "azeez",
+  "license": "MIT"
+}
