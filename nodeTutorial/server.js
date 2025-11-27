@@ -1,4 +1,9 @@
 import http from "http";
+import { fileURLToPath } from "url";
+import { dirname } from "path";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__pathname);
 
 const PORT = 5000;
 
