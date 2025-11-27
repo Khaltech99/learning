@@ -10,6 +10,7 @@ const PORT = 5000;
 const server = http.createServer((req, res) => {
   try {
     // if get request
+
     if (req.method === "GET") {
       if (req.url === "/") {
         res.writeHead(200, { "content-type": "text/html" });
