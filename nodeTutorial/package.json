@@ -5,7 +5,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "dev": "nodemon server2"
+    "dev": "nodemon server3"
   },
   "author": "azeez",
   "license": "MIT",
