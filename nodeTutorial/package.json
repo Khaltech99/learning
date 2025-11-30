@@ -5,7 +5,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "dev": "nodemon emitter"
+    "dev": "nodemon hash"
   },
   "author": "azeez",
   "license": "MIT",
