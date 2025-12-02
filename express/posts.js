@@ -1,4 +1,5 @@
 import { Router } from "express";
+import error from "./error.js";
 
 const router = Router();
 
@@ -9,48 +10,53 @@ let posts = [
   { id: 4, title: "four" },
 ];
 
+// get router
 router.get("/", (req, res) => {
   return res.status(200).json(posts);
 });
 
-router.get("/:id", (req, res) => {
+router.get("/:id", (req, res, next) => {
   const id = parseInt(req.params.id);
   const searchedPost = posts.find((post) => post.id === id);
   if (!searchedPost) {
-    return res.status(400).json({ msg: "post not found" });
+    return next(error(400, "post not found"));
   }
   res.status(200).json(searchedPost);
 });
 
-router.post("/", (req, res) => {
+// post router
+
+router.post("/", (req, res, next) => {
   const newPost = { id: posts.length + 1, title: req.body.title };
   if (!req.body.title) {
-    return res.status(404).json({ msg: "not title found" });
+    return next(error(404, "title not found"));
   }
   posts.push(newPost);
   res.status(200).json(newPost);
 });
 
-router.put("/:id", (req, res) => {
+// put router
+router.put("/:id", (req, res, next) => {
   const id = parseInt(req.params.id);
 
   const post = posts.find((post) => post.id === id);
 
   if (!post) {
-    return res.status(404).json({ msg: "post not found" });
+    return next(error(404, "post not found"));
   }
   const editedTitle = req.body.title;
   post.title = editedTitle;
   res.status(201).json(post);
 });
 
-router.delete("/:id", (req, res) => {
+//delete router
+router.delete("/:id", (req, res, next) => {
   const id = parseInt(req.params.id);
 
   const post = posts.find((post) => post.id === id);
 
   if (!post) {
-    return res.status(404).json({ msg: "post not found" });
+    return next(error(404, "post not found"));
   }
 
   posts = posts.filter((p) => p.id !== id); // ✅ Reassign posts array
