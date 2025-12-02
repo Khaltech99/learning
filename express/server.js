@@ -12,8 +12,9 @@ const port = process.env.PORT;
 app.use(express.urlencoded({ extended: false }));
 
 app.use("/api/posts", posts);
+
 app.use((req, res, next) => {
-  next(error(500, "unknown route"));
+  next(error(404, "unknown route"));
 });
 app.use(errorHandler);
 
