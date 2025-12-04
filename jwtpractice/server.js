@@ -1,10 +1,24 @@
 import express from "express";
+import cors from "cors";
+import router from "./auth.js";
+import errorHandler from "./errorHandler.js";
 
 const app = express();
 
-// port and port listeners
+// middlewares
+app.use(cors());
+app.use(express.json());
 
-const port = process.env.PORT;
+app.use("/api/user/auth", router);
+
+// 404 handler for invalid route
+app.use((req, res, next) => {
+  res.status(404).json({ message: "invalid route" });
+  next();
+});
+
+// port and port listeners
+const port = process.env.PORT || 3000;
 app.listen(port, () => {
-  console.log(`listening to port:${port}`);
+  console.log(`listening on port: ${port}`);
 });
