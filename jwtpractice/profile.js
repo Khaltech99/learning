@@ -1,11 +1,9 @@
 import { Router } from "express";
 import tokenAuth from "./tokenAuth.js";
+import profileController from "./controllers/profileController.js";
 
 const router = Router();
 
-router.get("/profile", tokenAuth, (req, res, next) => {
-  res.status(200).json({ message: "token success", user: req.user });
-  next();
-});
+router.get("/profile", tokenAuth, profileController);
 
 export default router;
