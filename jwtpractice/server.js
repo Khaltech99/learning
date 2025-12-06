@@ -2,6 +2,7 @@ import express from "express";
 import cors from "cors";
 import router from "./auth.js";
 import errorHandler from "./middlewares/errorHandler.js";
+import userProfile from "./profile.js";
 
 const app = express();
 
@@ -11,6 +12,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use("/api/user/auth", router);
+app.use("/user", userProfile);
 
 // 404 handler for invalid route
 app.use((req, res, next) => {
