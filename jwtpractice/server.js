@@ -3,6 +3,7 @@ import cors from "cors";
 import router from "./auth.js";
 import errorHandler from "./middlewares/errorHandler.js";
 import userProfile from "./profile.js";
+import connectDb from "./config/database.js";
 
 const app = express();
 
@@ -11,6 +12,7 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+// routes
 app.use("/api/user/auth", router);
 app.use("/user", userProfile);
 
@@ -22,6 +24,10 @@ app.use((req, res, next) => {
 
 // port and port listeners
 const port = process.env.PORT || 3000;
-app.listen(port, () => {
-  console.log(`listening on port: ${port}`);
-});
+connectDb()
+  .then(
+    app.listen(port, () => {
+      console.log(`listening on port: ${port}`);
+    })
+  )
+  .catch((error) => console.log(error));
