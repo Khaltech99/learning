@@ -1,20 +1,42 @@
 import bcrypt from "bcrypt";
-import { user } from "../users.js";
+import User from "../model/userModel.js";
 
 const registerController = async (req, res, next) => {
-  if (!req.body) {
-    return res.status(400).json({ message: "invalid body" });
-  }
-
   const { email, password } = req.body;
-  const hashedPassword = await bcrypt.hash(password, 12);
 
-  user.push({
-    email,
-    password: hashedPassword,
-  });
+  try {
+    // check for empty body
+    if (!email || !password)
+      return res
+        .status(400)
+        .json({ message: "No email, or password provided" });
 
-  return res.status(201).json({ user: user, message: "user created success" });
+    // Checking for duplicate user
+    const existingUser = await User.findOne({ email });
+
+    if (existingUser)
+      return res.status(400).json({ message: "User Already exist" });
+
+    // Create new user
+    const hashedPassword = await bcrypt.hash(password, 12);
+
+    const newUser = await User.create({
+      email,
+      password: hashedPassword,
+    });
+
+    const response = {
+      email: newUser.email,
+      id: newUser._id,
+      createdAt: newUser.createdAt,
+    };
+
+    return res
+      .status(201)
+      .json({ message: "user created success", user: response });
+  } catch (err) {
+    res.status(500).json({ message: "Error creating new user,", error: err });
+  }
 };
 
 export default registerController;
