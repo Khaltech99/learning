@@ -72,3 +72,6 @@ will have to implement some stuff tomorro, but im tired now
 Learning mongodb basics at the moment
 
 Learning mongodb at the moment
+
+learnt how to use helment, which is used for http settings,
+learnt express-rate-limit used for setting request limit
