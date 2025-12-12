@@ -70,3 +70,5 @@ I need to learn about async storage tomorrow locked on
 will have to implement some stuff tomorro, but im tired now
 
 Learning mongodb basics at the moment
+
+Learning mongodb at the moment
