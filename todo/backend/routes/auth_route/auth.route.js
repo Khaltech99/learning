@@ -1,94 +1,94 @@
 import { Router } from "express";
-
 import User from "../../models/user.model.js";
 import bcrypt from "bcrypt";
-
 import jwt from "jsonwebtoken";
 
 const secret = process.env.SECRET;
 
+if (!secret) {
+  throw new Error("JWT SECRET is not defined");
+}
+
 const authRouter = Router();
 
+/* REGISTER */
 authRouter.post("/register", async (req, res) => {
   try {
     const { username, password, email } = req.body;
-    const normalizeEmail = email.tolowerCase().trim();
-    // check if the body is empty
-    if (!username || !password || !normalizeEmail)
-      return res
-        .status(400)
-        .json({ message: "No username, email  or password provided" });
 
-    // check for existing user
-    const existingUser = await User.findOne({ normalizeEmail });
-    if (existingUser)
-      return res
-        .status(401)
-        .json({ message: "user with the following email already exist" });
+    if (!username || !password || !email) {
+      return res.status(400).json({
+        message: "No username, email or password provided",
+      });
+    }
 
-    // hash the password when its not empty and no duplicate user.
-    const hashed_password = await bcrypt.hash(password, 12);
-    // create the user
+    const normalizedEmail = email.toLowerCase().trim();
+
+    const existingUser = await User.findOne({ email: normalizedEmail });
+    if (existingUser) {
+      return res.status(409).json({
+        message: "User with this email already exists",
+      });
+    }
+
+    const hashedPassword = await bcrypt.hash(password, 12);
 
     const newUser = await User.create({
-      username: username,
-      email: normalizeEmail,
-      password: hashed_password,
+      username,
+      email: normalizedEmail,
+      password: hashedPassword,
     });
 
-    // sending extracted user to prevent password leakage
-    const extractedUser = {
-      username: newUser.username,
-      email: newUser.email,
-      id: newUser._id,
-    };
-
-    res
-      .status(201)
-      .json({ message: "user registered successfully", user: extractedUser });
+    res.status(201).json({
+      message: "User registered successfully",
+      user: {
+        id: newUser._id,
+        username: newUser.username,
+        email: newUser.email,
+      },
+    });
   } catch (error) {
+    console.error("Register Error:", error);
     res.status(500).json({ message: "Register error" });
   }
 });
 
-// login route
+/* LOGIN */
 authRouter.post("/login", async (req, res) => {
   try {
     const { email, password } = req.body;
-    const normalizedEmail = email.tolowerCase().trim();
 
-    //  check if the user does not provide email and password
-    if (!normalizedEmail || !password)
-      return res
-        .status(401)
-        .json({ message: "Please provide email and password" });
-    // get the user first
-    const foundUser = await User.findOne({ normalizedEmail });
+    if (!email || !password) {
+      return res.status(400).json({
+        message: "Please provide email and password",
+      });
+    }
 
-    if (!foundUser)
-      return res.status(401).json({ message: "Invalid email or password" });
+    const normalizedEmail = email.toLowerCase().trim();
 
-    // compare this password to the database password
+    const foundUser = await User.findOne({ email: normalizedEmail });
+    if (!foundUser) {
+      return res.status(401).json({
+        message: "Invalid email or password",
+      });
+    }
+
     const isMatch = await bcrypt.compare(password, foundUser.password);
-
-    // check if its not equal
-    if (!isMatch)
-      return res
-        .status(401)
-        .json({ message: "Either email or password does not match" });
-
-    // check if the secret is active
-
-    if (!secret) return new Error("the secret is not active");
+    if (!isMatch) {
+      return res.status(401).json({
+        message: "Invalid email or password",
+      });
+    }
 
     const token = jwt.sign(
-      { id: foundUser._id, email: foundUser.normalizedEmail },
+      { sub: foundUser._id.toString(), email: foundUser.email },
       secret,
       { expiresIn: "2h" }
     );
 
     res.status(200).json({ message: "User logged in", token });
   } catch (error) {
+    console.error("Login Error:", error);
     res.status(500).json({ message: "Login error" });
   }
 });
