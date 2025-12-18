@@ -23,7 +23,7 @@ authRouter.post("/register", async (req, res) => {
     const existingUser = await User.findOne({ normalizeEmail });
     if (existingUser)
       return res
-        .status(400)
+        .status(401)
         .json({ message: "user with the following email already exist" });
 
     // hash the password when its not empty and no duplicate user.
@@ -60,7 +60,7 @@ authRouter.post("/login", async (req, res) => {
     //  check if the user does not provide email and password
     if (!normalizedEmail || !password)
       return res
-        .status(400)
+        .status(401)
         .json({ message: "Please provide email and password" });
     // get the user first
     const foundUser = await User.findOne({ normalizedEmail });
@@ -74,7 +74,7 @@ authRouter.post("/login", async (req, res) => {
     // check if its not equal
     if (!isMatch)
       return res
-        .status(400)
+        .status(401)
         .json({ message: "Either email or password does not match" });
 
     // check if the secret is active
