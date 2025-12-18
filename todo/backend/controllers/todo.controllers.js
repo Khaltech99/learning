@@ -1,5 +1,5 @@
 // get todos
-export const getTodos = (req, res) => {};
+export const getTodos = async (req, res) => {};
 
 // create todos
 export const createTodo = (req, res) => {};
