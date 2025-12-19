@@ -1,48 +1,35 @@
 // imports
-import bcrypt from "bcrypt";
-import jwt from "jsonwebtoken";
-import User from "./../models/user.model.js";
 
-const secret = process.env.SECRET;
+import {
+  loginUserService,
+  registerUserServices,
+} from "../services/auth.services.js";
 
-if (!secret) {
-  throw new Error("JWT SECRET is not defined");
-}
 // register user controller
 export const registerUser = async (req, res) => {
   try {
     const { username, password, email } = req.body;
 
+    // checking if no username, password, or email in the req.body
+
     if (!username || !password || !email) {
-      return res.status(400).json({
-        message: "No username, email or password provided",
-      });
+      return res
+        .status(401)
+        .json({ message: "Please provide your credentials" });
     }
 
-    const normalizedEmail = email.toLowerCase().trim();
+    const sanitizedEmail = email.toLowerCase().trim();
 
-    const existingUser = await User.findOne({ email: normalizedEmail });
-    if (existingUser) {
-      return res.status(409).json({
-        message: "User with this email already exists",
-      });
-    }
-
-    const hashedPassword = await bcrypt.hash(password, 12);
-
-    const newUser = await User.create({
+    // use the register services
+    const user = await registerUserServices({
       username,
-      email: normalizedEmail,
-      password: hashedPassword,
+      password,
+      email: sanitizedEmail,
     });
 
     res.status(201).json({
       message: "User registered successfully",
-      user: {
-        id: newUser._id,
-        username: newUser.username,
-        email: newUser.email,
-      },
+      user: user,
     });
   } catch (error) {
     console.error("Register Error:", error);
@@ -54,34 +41,20 @@ export const registerUser = async (req, res) => {
 export const loginUser = async (req, res) => {
   try {
     const { email, password } = req.body;
-
+    // check if email email and password is provided by the user
     if (!email || !password) {
       return res.status(400).json({
         message: "Please provide email and password",
       });
     }
+    // sanitize the email to avoid spaces and case
+    const sanitizedEmail = email.toLowerCase().trim();
 
-    const normalizedEmail = email.toLowerCase().trim();
+    const token = await loginUserService({ email: sanitizedEmail, password });
 
-    const foundUser = await User.findOne({ email: normalizedEmail });
-    if (!foundUser) {
-      return res.status(401).json({
-        message: "Invalid email or password",
-      });
+    if (!token) {
+      return res.status(401).json({ message: "unable to login" });
     }
-
-    const isMatch = await bcrypt.compare(password, foundUser.password);
-    if (!isMatch) {
-      return res.status(401).json({
-        message: "Invalid email or password",
-      });
-    }
-
-    const token = jwt.sign(
-      { sub: foundUser._id.toString(), email: foundUser.email },
-      secret,
-      { expiresIn: "2h" }
-    );
 
     res.status(200).json({ message: "User logged in", token });
   } catch (error) {
