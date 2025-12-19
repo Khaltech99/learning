@@ -10,14 +10,6 @@ export const registerUser = async (req, res) => {
   try {
     const { username, password, email } = req.body;
 
-    // checking if no username, password, or email in the req.body
-
-    if (!username || !password || !email) {
-      return res
-        .status(401)
-        .json({ message: "Please provide your credentials" });
-    }
-
     const sanitizedEmail = email.toLowerCase().trim();
 
     // use the register services
@@ -41,12 +33,7 @@ export const registerUser = async (req, res) => {
 export const loginUser = async (req, res) => {
   try {
     const { email, password } = req.body;
-    // check if email email and password is provided by the user
-    if (!email || !password) {
-      return res.status(400).json({
-        message: "Please provide email and password",
-      });
-    }
+
     // sanitize the email to avoid spaces and case
     const sanitizedEmail = email.toLowerCase().trim();
 
