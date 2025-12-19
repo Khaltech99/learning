@@ -5,11 +5,12 @@ import {
   editTodo,
   getTodos,
 } from "../../controllers/todo.controllers.js";
+import { protectRouteMiddleware } from "../../middlewares/auth.middleware.js";
 
 const router = Router();
 
 // get todos route
-router.get("/todos", getTodos);
+router.get("/todos", protectRouteMiddleware, getTodos);
 
 //  create todo route
 router.post("/todos/create", createTodo);
