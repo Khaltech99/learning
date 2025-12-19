@@ -1,5 +1,7 @@
 // get todos
-export const getTodos = async (req, res) => {};
+export const getTodos = async (req, res) => {
+  res.status(200).json({ message: "success", user: req.user });
+};
 
 // create todos
 export const createTodo = (req, res) => {};
