@@ -10,7 +10,7 @@ import { protectRouteMiddleware } from "../../middlewares/auth.middleware.js";
 const router = Router();
 
 // get todos route
-router.get("/todos", protectRouteMiddleware, getTodos);
+router.get("/todos", getTodos);
 
 //  create todo route
 router.post("/todos/create", createTodo);
