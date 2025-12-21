@@ -52,3 +52,33 @@ export const deleteTodoServices = async (todoId, userId) => {
 
   return deletedTodo;
 };
+
+// EDIT TODO SERVICE
+
+export const editTodoServices = async (
+  todoId,
+  userId,
+  newTitle,
+  newDescription
+) => {
+  // CHECKING IF TODO_ID DOES NOT EXIST
+  if (!todoId) {
+    throw new Error("TO DO WITH THIS ID NOT FOUND");
+  }
+  // CHECK IF USER DOES NOT EXIST
+  if (!userId) {
+    throw new Error("USER NOT FOUND");
+  }
+
+  const updatedTodo = await Todo.findOneAndUpdate(
+    { _id: todoId, user: userId },
+    { $set: { title: newTitle, description: newDescription } },
+    { new: true }
+  );
+
+  if (!updatedTodo) {
+    throw new Error("TODO NOT UPDATED");
+  }
+
+  return updatedTodo;
+};
