@@ -56,7 +56,7 @@ export const loginUserService = async ({ email, password }) => {
     return jwt.sign(
       { sub: foundUser._id.toString(), email: foundUser.email },
       secret,
-      { expiresIn: "2h" }
+      { expiresIn: "3h" }
     );
   } catch (error) {
     throw new Error(error.message);
