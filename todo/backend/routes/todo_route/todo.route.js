@@ -10,13 +10,13 @@ import { protectRouteMiddleware } from "../../middlewares/auth.middleware.js";
 const router = Router();
 
 // get todos route
-router.get("/todos", getTodos);
+router.get("/todos", protectRouteMiddleware, getTodos);
 
 //  create todo route
-router.post("/todos/create", createTodo);
+router.post("/todos/create", protectRouteMiddleware, createTodo);
 
 // delete todo route
-router.delete("/todos/delete/:id", deleteTodo);
+router.delete("/todos/delete/:id", protectRouteMiddleware, deleteTodo);
 
 // edit todo route
 router.put("/todos/edit/:id", editTodo);
