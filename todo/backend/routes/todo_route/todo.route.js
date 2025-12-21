@@ -19,6 +19,6 @@ router.post("/todos/create", protectRouteMiddleware, createTodo);
 router.delete("/todos/delete/:id", protectRouteMiddleware, deleteTodo);
 
 // edit todo route
-router.put("/todos/edit/:id", editTodo);
+router.put("/todos/edit/:id", protectRouteMiddleware, editTodo);
 
 export default router;
