@@ -2,6 +2,7 @@ import Todo from "../models/todo.model.js";
 import {
   createTodoServices,
   deleteTodoServices,
+  editTodoServices,
   getTodoServices,
 } from "../services/todo.services.js";
 
@@ -61,4 +62,19 @@ export const deleteTodo = async (req, res) => {
 };
 
 // edit todos
-export const editTodo = (req, res) => {};
+export const editTodo = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const userId = req.user.id;
+    const { title, description } = req.body;
+
+    const updated = await editTodoServices(id, userId, title, description);
+
+    // SUCCESS
+    res
+      .status(201)
+      .json({ message: "todo updated successfully", updatedField: updated });
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+};
