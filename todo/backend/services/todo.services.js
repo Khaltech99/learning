@@ -1,4 +1,5 @@
 import Todo from "../models/todo.model.js";
+import { customError } from "../utils/error.js";
 
 // CREATE TODO SERVICE
 export const createTodoServices = async (title, description, user) => {
@@ -17,16 +18,47 @@ export const createTodoServices = async (title, description, user) => {
 };
 
 // GET TODO SERVICE
-export const getTodoServices = async (userId) => {
-  if (!userId || userId === null || userId === "undefined") {
+export const getTodoServices = async (userId, filter) => {
+  if (!userId) {
     throw new Error("YOU ARE NOT AUTHORIZED TO DO THIS");
   }
-  const todos = await Todo.find({ user: userId });
-  if (todos.length === 0) {
-    throw new Error("YOU DO NOT HAVE ANY TODOS AT THE MOMENT");
+
+  // 1. Destructure to separate filters from pagination controls
+  const { page = 1, limit, completed, ...otherFilters } = filter;
+
+  // 2. Build the query using only actual data fields
+  const query = { ...otherFilters, user: userId };
+
+  // 3. Cast Booleans
+  if (completed === "false") query.completed = false;
+  if (completed === "true") query.completed = true;
+
+  const safeLimit = Math.min(parseInt(limit) || 2, 10);
+
+  // 4. Pagination logic
+
+  const skip = (parseInt(page) - 1) * safeLimit;
+
+  // 5. Fetch Data and Total Count concurrently
+  const [todos, total] = await Promise.all([
+    Todo.find(query).skip(skip).limit(safeLimit).sort({ createdAt: -1 }),
+    Todo.countDocuments(query),
+  ]);
+
+  if (todos.length === 0 && page === 1) {
+    throw customError("NO TODO FOUND", 404);
   }
 
-  return todos;
+  // 6. Return a proper pagination object
+  return {
+    data: todos,
+    meta: {
+      totalItems: total,
+      currentPage: parseInt(page),
+      totalPages: Math.ceil(total / safeLimit),
+      itemsPerPage: safeLimit,
+    },
+  };
 };
 
 // DELETE TODO SERVICE
@@ -59,7 +91,8 @@ export const editTodoServices = async (
   todoId,
   userId,
   newTitle,
-  newDescription
+  newDescription,
+  newCompleted
 ) => {
   // CHECKING IF TODO_ID DOES NOT EXIST
   if (!todoId) {
@@ -72,7 +105,13 @@ export const editTodoServices = async (
 
   const updatedTodo = await Todo.findOneAndUpdate(
     { _id: todoId, user: userId },
-    { $set: { title: newTitle, description: newDescription } },
+    {
+      $set: {
+        title: newTitle,
+        description: newDescription,
+        completed: newCompleted,
+      },
+    },
     { new: true }
   );
 

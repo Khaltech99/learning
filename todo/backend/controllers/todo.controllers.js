@@ -7,16 +7,18 @@ import {
 } from "../services/todo.services.js";
 
 // get todos
-export const getTodos = async (req, res) => {
+export const getTodos = async (req, res, next) => {
   try {
     // CHECK IF THEIR IS USER ID FROM THE REQ
     const userId = req.user.id;
-    const todos = await getTodoServices(userId);
+    const filter = req.query;
+
+    const todos = await getTodoServices(userId, filter);
 
     // RETURN THE TODO
     return res.status(200).json({ message: "getting todo", todos });
   } catch (error) {
-    res.status(400).json({ message: error.message });
+    next(error);
   }
 };
 
@@ -66,9 +68,15 @@ export const editTodo = async (req, res) => {
   try {
     const { id } = req.params;
     const userId = req.user.id;
-    const { title, description } = req.body;
+    const { title, description, completed } = req.body;
 
-    const updated = await editTodoServices(id, userId, title, description);
+    const updated = await editTodoServices(
+      id,
+      userId,
+      title,
+      description,
+      completed
+    );
 
     // SUCCESS
     res

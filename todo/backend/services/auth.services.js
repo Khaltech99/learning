@@ -2,6 +2,7 @@
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import User from "../models/user.model.js";
+import { customError } from "../utils/error.js";
 
 const secret = process.env.SECRET;
 
@@ -17,7 +18,7 @@ export const registerUserServices = async ({ username, password, email }) => {
   const existingUser = await User.findOne({ email });
 
   if (existingUser) {
-    throw new Error("THE USER WITH THIS EMAIL EXISTS");
+    throw customError(400, "USER WITH THIS EMAIL ALREADY EXIST");
   }
 
   //   hashing the password for security reason
@@ -44,13 +45,13 @@ export const loginUserService = async ({ email, password }) => {
     const foundUser = await User.findOne({ email });
 
     if (!foundUser) {
-      throw new Error("INVALID EMAIL OR PASSWORD");
+      throw customError(401, "INVALID EMAIL OR PASSWORD");
     }
 
     // check if the password matches the provided password
     const isMatch = await bcrypt.compare(password, foundUser.password);
     if (!isMatch) {
-      throw new Error("INVALID EMAIL OR PASSWORD");
+      throw customError(400, "EITHER EMAIL OF PASSWORD IS WRONG");
     }
     // send the token after the checks
     return jwt.sign(
@@ -59,6 +60,6 @@ export const loginUserService = async ({ email, password }) => {
       { expiresIn: "3h" }
     );
   } catch (error) {
-    throw new Error(error.message);
+    throw customError(500, error.message);
   }
 };
